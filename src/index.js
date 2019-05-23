@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import './index.css';
 import { Route, Link, Switch, BrowserRouter as Router } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
@@ -8,6 +10,7 @@ import Homepage from './containers/Homepage';
 import SummaryPage from './containers/SummaryPage';
 import App from './App';
 import NotFoundPage from './containers/NotFoundPage';
+import reducer from './store/reducer';
 
 const router = (
 <Router>
@@ -37,7 +40,18 @@ const router = (
   </Router>
 );
 
-ReactDOM.render(router, document.getElementById('training-div'));
+export const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const provider = (
+  <Provider store={store}>
+    {router}
+  </Provider>
+);
+
+ReactDOM.render(provider, document.getElementById('training-div'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

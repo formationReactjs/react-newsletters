@@ -1,8 +1,9 @@
 import React, { PureComponent, Fragment } from 'react';
+import { connect } from 'react-redux';
 import '../App.css';
 import ButtonSubmitComponents from '../components/ButtonSubmitComponent';
 
-export default class SummaryPage extends PureComponent {
+class SummaryPage extends PureComponent {
     constructor() {
         super();
         this.onClick = this.onClick.bind(this);
@@ -20,6 +21,7 @@ export default class SummaryPage extends PureComponent {
                 <br />
                 <div className="c-title l-wrapper--large">
                     <h1 className="c-title__text">Merci d'avoir souscris à notre newsletter!</h1>
+                    <h1 className="c-title__text">{"Nous vous avons envoyé un email à l'adresse " + this.props.email}</h1>
                 </div>
                 <br />
                 <br />
@@ -34,3 +36,11 @@ export default class SummaryPage extends PureComponent {
         );
     }
 }
+
+const mapStateToProps = function(state) {
+    return {
+      email: state.formReducer.email
+    }
+  }
+  
+  export default connect(mapStateToProps)(SummaryPage);
