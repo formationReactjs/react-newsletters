@@ -1,20 +1,28 @@
-import React, { Component } from "react";
-import InputGenericComponent from "./InputGenericComponent";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import InputGenericComponent from './InputGenericComponent';
 
 export default class InputEmailComponent extends Component {
-
-    constructor () {
+    constructor() {
         super();
         this.validator = this.validator.bind(this);
     }
 
-    validator (email) {
+    validator(email) {
         const pattern = /^[A-Za-z0-9.\-_]+[@][A-Za-z0-9\-.]+[.][A-Za-z]{2,}?$/;
-        console.log(pattern.test(String(email).toLowerCase()));
+        this.props.onValidEmail(pattern.test(String(email).toLowerCase()), email);
     }
     render() {
-        return(
-        <InputGenericComponent validator={this.validator} type="email" />
+        return (
+            <InputGenericComponent validator={this.validator} type="email" />
         );
     }
 }
+
+InputEmailComponent.propTypes = {
+    onValidEmail: PropTypes.func
+};
+
+InputEmailComponent.defaultProps = {
+    onValidEmail: () => {}
+};
