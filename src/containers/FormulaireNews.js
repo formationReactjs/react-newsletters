@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import InputEmailComponent from '../components/InputEmailComponent';
 import CheckboxComponent from '../components/CheckboxComponent';
 import ButtonSubmitComponents from '../components/ButtonSubmitComponent';
+import { setForm } from '../store/actions/FormAction';
 
-export default class FormulaireNews extends Component {
+class FormulaireNews extends Component {
     constructor() {
         super();
         this.state = {
@@ -38,6 +41,10 @@ export default class FormulaireNews extends Component {
         console.log('handleSubmit');
         console.log(this.state.form);
 
+        this.props.setForm({
+            email: this.state.form.email,
+            checkbox: this.state.form.checkbox
+        });
         this.props.history.push('/summary');
     }
     render() {
@@ -69,3 +76,11 @@ FormulaireNews.defaultProps = {
     isEmailValide: () => {},
     isChecked: () => {}
 };
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ setForm }, dispatch);
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(FormulaireNews);
