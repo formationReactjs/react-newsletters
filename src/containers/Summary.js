@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import ButtonSubmitComponents from '../components/ButtonSubmitComponent';
+import { getEmail } from '../store/reducers/FormReducer';
 
 class Summary extends Component {
     handleSubmit = () => {
@@ -22,11 +23,6 @@ class Summary extends Component {
         );
     }
 }
-const mapStateToProps = state => {
-    return { email: state.FormReducer.email };
-};
+const mapStateToProps = state => getEmail(state);
 
-export default connect(
-    mapStateToProps,
-    null
-)(Summary);
+export default connect(mapStateToProps)(Summary);

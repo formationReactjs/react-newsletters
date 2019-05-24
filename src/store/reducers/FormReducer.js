@@ -11,3 +11,5 @@ export default function FormReducer(state = initialState, action) {
             return state;
     }
 }
+
+export const getEmail = state => ({ email: state.FormReducer.email });
