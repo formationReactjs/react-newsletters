@@ -37,6 +37,8 @@ export default class FormulaireNews extends Component {
     handleSubmit() {
         console.log('handleSubmit');
         console.log(this.state.form);
+
+        this.props.history.push('/summary');
     }
     render() {
         return (
@@ -45,8 +47,14 @@ export default class FormulaireNews extends Component {
                 {this.state.isEmailValide && (
                     <CheckboxComponent onCheckedBox={this.isChecked} />
                 )}
+
                 {this.state.isChecked && (
-                    <ButtonSubmitComponents onSubmit={this.handleSubmit} />
+                    <div className="u-padding-spacer c-btnWrapper u-theme-jadeGreen c-btnWrapper--fullOnMobile">
+                        {' '}
+                        <ButtonSubmitComponents
+                            onSubmit={this.handleSubmit}
+                        />{' '}
+                    </div>
                 )}
             </Fragment>
         );

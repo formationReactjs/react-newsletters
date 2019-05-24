@@ -15,14 +15,15 @@ export default class ButtonSubmitComponents extends Component {
         this.props.onSubmit();
     }
     render() {
+        const { label } = this.props;
         return (
-            <div className="c-btnWrapper u-theme-jadeGreen c-btnWrapper--fullOnMobile">
+            <div className="c-baseBtn u-theme-bg u-theme-bg-hover c-baseBtn--hasLoader c-baseBtn--large">
                 <button
                     className="c-baseBtn u-theme-bg u-theme-bg-hover c-baseBtn--large"
                     type="submit"
                     onClick={this.submit}
                 >
-                    <span className="c-baseBtn__content">Valider</span>
+                    <span className="c-baseBtn__content">{label}</span>
                 </button>
             </div>
         );
@@ -30,9 +31,11 @@ export default class ButtonSubmitComponents extends Component {
 }
 
 ButtonSubmitComponents.propTypes = {
-  onSubmit: PropTypes.func
+    label: PropTypes.string,
+    onSubmit: PropTypes.func
 };
 
 ButtonSubmitComponents.defaultProps = {
-  onSubmit: () => {}
+    label: 'Envoyer',
+    onSubmit: () => {}
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import FormulaireNews from './containers/FormulaireNews';
+import Home from './containers/Home';
 
 function App() {
   return (
     <div className="App">
-      <FormulaireNews />
+      <Home />
     </div>
   );
 }
