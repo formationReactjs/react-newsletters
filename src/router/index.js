@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import '../App.css';
 import {
     BrowserRouter as Router,
@@ -12,10 +12,22 @@ import Summary from '../containers/Summary';
 import NotFound from '../containers/NotFound';
 import Home from '../containers/Home';
 
-const isFirstEnter = true;
 
-export const routes = (
-    <Router>
+export default class MyRouter extends Router {
+    constructor() {
+        super();
+        this.state = { isAlreadyLoaded: false };
+    }
+
+    componentDidMount() {
+        this.setState({
+            isAlreadyLoaded: true
+        });
+    }
+
+    render() {
+        return (
+            <Router>
         <ul>
             <li>
                 <Link to={'/'}>Home</Link>
@@ -31,30 +43,27 @@ export const routes = (
             </li>
         </ul>
         <Switch>
+            {!this.state.isAlreadyLoaded && <Redirect to="/" />}
+            {this.state.isAlreadyLoaded && <Fragment>
             <Route exact path="/" component={Home} />
             <Route
-                exact
                 path="/newsletter"
-                render={() =>
-                    isFirstEnter ? <Redirect to="/" /> : <FormulaireNews />
-                }
+                component={FormulaireNews}
             />
             <Route
-                exact
                 path="/summary"
-                render={() =>
-                    isFirstEnter ? <Redirect to="/" /> : <Summary />
-                }
+                component={Summary}
             />
             <Route
-                exact
                 path="/not-found"
-                render={() =>
-                    isFirstEnter ? <Redirect to="/" /> : <NotFound />
-                }
+                component={NotFound}
             />
             {/* when none of the above match, <NoMatch> will be rendered */}
+            </Fragment>}
             <Route component={NotFound} />
         </Switch>
     </Router>
-);
+        );
+    }
+
+}

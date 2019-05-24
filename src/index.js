@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { routes } from './router';
+import MyRouter from './router/index';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(routes, document.getElementById('training-div'));
+ReactDOM.render(<MyRouter />, document.getElementById('training-div'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
