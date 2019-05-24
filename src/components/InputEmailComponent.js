@@ -14,7 +14,7 @@ export default class InputEmailComponent extends Component {
     }
     render() {
         return (
-            <InputGenericComponent validator={this.validator} type="email" />
+            <InputGenericComponent validator={this.validator} type="email" {...this.props} />
         );
     }
 }

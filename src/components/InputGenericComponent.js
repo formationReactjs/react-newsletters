@@ -6,6 +6,13 @@ export default class InputGenericComponent extends Component {
     constructor () {
         super();
         this.onBlur = this.onBlur.bind(this);
+        this.inputRef = React.createRef();
+    }
+
+    componentDidMount() {
+        if(this.props.focused) {
+            this.inputRef.current.focus();
+        }
     }
 
     onBlur(el) {
@@ -25,6 +32,7 @@ export default class InputGenericComponent extends Component {
                         autoCapitalize="off"
                         placeholder="Un placeholder"
                         onBlur={this.onBlur}
+                        ref={this.inputRef}
                     />
                     <label className="c-inputMat__label">
                         Input de type text
@@ -39,11 +47,13 @@ export default class InputGenericComponent extends Component {
 InputGenericComponent.propTypes = {
     type: PropTypes.string,
     validator: PropTypes.func,
-    onValidEmail: PropTypes.func
+    onValidEmail: PropTypes.func,
+    focused: PropTypes.bool
 };
 
 InputGenericComponent.defaultProps = {
     type: 'text',
     validator: () => {},
-    onValidEmail: () => {}
+    onValidEmail: () => {},
+    focused: false
 };

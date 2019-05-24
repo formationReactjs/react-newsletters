@@ -50,7 +50,8 @@ class FormulaireNews extends Component {
     render() {
         return (
             <Fragment>
-                <InputEmailComponent onValidEmail={this.isEmailValide} />
+                <InputEmailComponent onValidEmail={this.isEmailValide}/>
+                <InputEmailComponent focused />
                 {this.state.isEmailValide && (
                     <CheckboxComponent onCheckedBox={this.isChecked} />
                 )}
